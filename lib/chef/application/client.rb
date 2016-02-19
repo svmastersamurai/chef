@@ -411,7 +411,7 @@ class Chef::Application::Client < Chef::Application
       rescue SystemExit
         raise
       rescue Exception => e
-        Chef::Application.fatal!("#{e.class}: #{e.message}", 1)
+        Chef::Application.fatal!("#{e.class}: #{e.message}", e)
       end
     else
       interval_run_chef_client
@@ -446,7 +446,7 @@ class Chef::Application::Client < Chef::Application
           Chef::Log.debug("#{e.class}: #{e}\n#{e.backtrace.join("\n")}")
           retry
         else
-          Chef::Application.fatal!("#{e.class}: #{e.message}", 1)
+          Chef::Application.fatal!("#{e.class}: #{e.message}", e)
         end
       end
     end
