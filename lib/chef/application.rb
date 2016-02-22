@@ -271,7 +271,7 @@ class Chef
           @chef_client.run
         rescue Exception => e
           Chef::Log.error(e.to_s)
-          exit 1
+          exit e.status
         else
           exit 0
         end
