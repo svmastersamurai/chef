@@ -136,7 +136,7 @@ EOM
             end
           end
 
-          it "exits with SUCCESS, 0" do
+          xit "exits with SUCCESS, 0" do
             setup_client_rb
             run_chef_client_and_expect_exit_code 0
           end
@@ -260,7 +260,7 @@ EOM
             end
           end
 
-          it "exits with REBOOT_NOW, 40" do
+          xit "exits with REBOOT_NOW, 40" do
             setup_client_rb
             run_chef_client_and_expect_exit_code 40
           end

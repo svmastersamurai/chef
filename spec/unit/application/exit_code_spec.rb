@@ -181,8 +181,9 @@ describe Chef::Application::ExitCode do
     end
     
     it "returns REBOOT_NEEDED when a reboot is pending" do
-      allow(Chef::DSL::RebootPending).to receive(:reboot_pending?).and_return(true)
-      expect(exit_codes.validate_exit_code(0)).to eq(37)
+      reboot_error = Chef::Exceptions::RebootPending.new('BOOM')
+      runtime_error = Chef::Exceptions::RunFailedWrappingError.new(reboot_error)
+      expect(exit_codes.validate_exit_code(runtime_error)).to eq(37)
     end
   end
 

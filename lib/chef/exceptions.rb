@@ -67,6 +67,7 @@ class Chef
     class Link < RuntimeError; end
     class Mount < RuntimeError; end
     class Reboot < RuntimeError; end
+    class RebootPending < RuntimeError; end
     class RebootFailed < Mixlib::ShellOut::ShellCommandFailed; end
     class PrivateKeyMissing < RuntimeError; end
     class CannotWritePrivateKey < RuntimeError; end

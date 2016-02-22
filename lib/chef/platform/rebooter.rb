@@ -28,6 +28,8 @@ class Chef
 
       class << self
 
+        include Chef::DSL::RebootPending
+
         def reboot!(node)
           reboot_info = node.run_context.reboot_info
 
@@ -47,7 +49,7 @@ class Chef
             raise Chef::Exceptions::RebootFailed.new(e.message)
           end
 
-          Chef::Exceptions::Reboot.new(msg) unless Chef::Application::ExitCode.allow_deprecated_exit_code
+          raise Chef::Exceptions::Reboot.new(msg) unless Chef::Application::ExitCode.allow_deprecated_exit_code
           Chef::Application::ExitCode.notify_reboot_exit_code_deprecation
         end
 

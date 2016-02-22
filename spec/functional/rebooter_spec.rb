@@ -101,5 +101,6 @@ describe Chef::Platform::Rebooter do
         end
       end
     end
+
   end
 end

@@ -15,7 +15,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-require "chef/dsl/reboot_pending"
 
 class Chef
   class Application
@@ -75,7 +74,7 @@ class Chef
         end
 
         private
-        
+
         def notify_on_deprecation(message)
           begin
             Chef.log_deprecation(message)
@@ -87,21 +86,8 @@ class Chef
 
         def resolve_exit_code(exit_code)
           return if exit_code.nil?
-          case exit_code 
-          when Fixnum
-            resolve_fixnum_exit_code(exit_code)
-          when Exception
-            resolve_exit_code_from_exception(exit_code)
-          end 
-        end
-        
-        def resolve_fixnum_exit_code(exit_code)
-          return exit_code if allow_deprecated_exit_code
-          if reboot_needed?(exit_code)
-            VALID_RFC_062_EXIT_CODES[:REBOOT_NEEDED]
-          else
-            exit_code
-          end
+          return exit_code if exit_code.is_a? Fixnum
+          resolve_exit_code_from_exception(exit_code)
         end
 
         def resolve_exit_code_from_exception(exception)
@@ -113,6 +99,8 @@ class Chef
             VALID_RFC_062_EXIT_CODES[:REBOOT_FAILED]
           elsif audit_failure?(exception)
             VALID_RFC_062_EXIT_CODES[:AUDIT_MODE_FAILURE]
+          elsif reboot_needed?(exception)
+            VALID_RFC_062_EXIT_CODES[:REBOOT_NEEDED]
           else
             VALID_RFC_062_EXIT_CODES[:GENERIC_FAILURE]
           end
@@ -124,8 +112,10 @@ class Chef
           end
         end
 
-        def reboot_needed?(exit_code)
-          exit_code == 0 && Chef::DSL::RebootPending.reboot_pending?
+        def reboot_needed?(exception)
+          resolve_exception_array(exception).any? do |e|
+            e.is_a? Chef::Exceptions::RebootPending
+          end
         end
 
         def reboot_failed?(exception)
@@ -172,14 +162,12 @@ class Chef
           " In a future release, non-standard exit codes will be redefined as" \
           " GENERIC_FAILURE unless `exit_status` is set to `:disabled` in your client.rb."
         end
-        
+
         def reboot_deprecation_warning
           "Per RFC 062 (https://github.com/chef/chef-rfc/blob/master/rfc062-exit-status.md)" \
           ", when a reboot is requested Chef Client will exit with an exit code of 40.  To maintain the current" \
-          "behavior (an exit code of 0), you will need to set `exit_status` to `:disabled` in your client.rb"
+          " behavior (an exit code of 0), you will need to set `exit_status` to `:disabled` in your client.rb"
         end
-
-        
 
         def default_exit_code
           return DEPRECATED_RFC_062_EXIT_CODES[:DEPRECATED_FAILURE] if allow_deprecated_exit_code
