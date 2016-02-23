@@ -93,8 +93,8 @@ class Chef
         def resolve_exit_code_from_exception(exception)
           if allow_deprecated_exit_code
             VALID_RFC_062_EXIT_CODES[:GENERIC_FAILURE]
-          elsif reboot_now?(exception)
-            VALID_RFC_062_EXIT_CODES[:REBOOT_NOW]
+          elsif reboot_scheduled?(exception)
+            VALID_RFC_062_EXIT_CODES[:REBOOT_SCHEDULED]
           elsif reboot_failed?(exception)
             VALID_RFC_062_EXIT_CODES[:REBOOT_FAILED]
           elsif audit_failure?(exception)
@@ -106,7 +106,7 @@ class Chef
           end
         end
 
-        def reboot_now?(exception)
+        def reboot_scheduled?(exception)
           resolve_exception_array(exception).any? do |e|
             e.is_a? Chef::Exceptions::Reboot
           end
@@ -165,8 +165,9 @@ class Chef
 
         def reboot_deprecation_warning
           "Per RFC 062 (https://github.com/chef/chef-rfc/blob/master/rfc062-exit-status.md)" \
-          ", when a reboot is requested Chef Client will exit with an exit code of 40.  To maintain the current" \
-          " behavior (an exit code of 0), you will need to set `exit_status` to `:disabled` in your client.rb"
+          ", when a reboot is requested Chef Client will exit with an exit code of 35, REBOOT_SCHEDULED." \
+          " To maintain the current behavior (an exit code of 0), you will need to set `exit_status` to" \
+          " `:disabled` in your client.rb"
         end
 
         def default_exit_code

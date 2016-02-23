@@ -168,7 +168,7 @@ EOM
     end
 
     def run_chef_client_and_expect_exit_code(exit_code)
-        shell_out!("#{chef_client} -c \"#{path_to('config/client.rb')}\" -o 'x::default'",
+      shell_out!("#{chef_client} -c \"#{path_to('config/client.rb')}\" -o 'x::default'",
         :cwd => chef_dir,
         :returns => [exit_code])
     end
@@ -240,7 +240,7 @@ RECIPE
             run_chef_client_and_expect_exit_code 1
           end
         end
-        
+
         context "with a recipe that requests a reboot" do
           before do
             file "cookbooks/x/recipes/default.rb", <<EOM
@@ -262,7 +262,7 @@ EOM
 
           xit "exits with REBOOT_NOW, 40" do
             setup_client_rb
-            run_chef_client_and_expect_exit_code 40
+            run_chef_client_and_expect_exit_code 35
           end
         end
 

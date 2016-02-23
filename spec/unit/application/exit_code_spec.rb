@@ -89,7 +89,7 @@ describe Chef::Application::ExitCode do
     end
 
     it "returns GENERIC_FAILURE when an exception is specified" do
-      expect(exit_codes.validate_exit_code(Exception.new('BOOM'))).to eq(1)
+      expect(exit_codes.validate_exit_code(Exception.new("BOOM"))).to eq(1)
     end
 
   end
@@ -122,7 +122,7 @@ describe Chef::Application::ExitCode do
     end
 
     it "returns GENERIC_FAILURE when an exception is specified" do
-      expect(exit_codes.validate_exit_code(Exception.new('BOOM'))).to eq(1)
+      expect(exit_codes.validate_exit_code(Exception.new("BOOM"))).to eq(1)
     end
 
     it "returns SUCCESS when a reboot is pending" do
@@ -159,29 +159,29 @@ describe Chef::Application::ExitCode do
     end
 
     it "returns GENERIC_FAILURE when an exception is specified" do
-      expect(exit_codes.validate_exit_code(Exception.new('BOOM'))).to eq(1)
+      expect(exit_codes.validate_exit_code(Exception.new("BOOM"))).to eq(1)
     end
 
     it "returns AUDIT_MODE_FAILURE when there is an audit error" do
-      audit_error = Chef::Exceptions::AuditError.new('BOOM')
+      audit_error = Chef::Exceptions::AuditError.new("BOOM")
       runtime_error = Chef::Exceptions::RunFailedWrappingError.new(audit_error)
       expect(exit_codes.validate_exit_code(runtime_error)).to eq(42)
     end
 
     it "returns REBOOT_NOW when there is an reboot requested" do
-      reboot_error = Chef::Exceptions::Reboot.new('BOOM')
+      reboot_error = Chef::Exceptions::Reboot.new("BOOM")
       runtime_error = Chef::Exceptions::RunFailedWrappingError.new(reboot_error)
       expect(exit_codes.validate_exit_code(runtime_error)).to eq(40)
     end
 
     it "returns REBOOT_FAILED when the reboot command fails" do
-      reboot_error = Chef::Exceptions::RebootFailed.new('BOOM')
+      reboot_error = Chef::Exceptions::RebootFailed.new("BOOM")
       runtime_error = Chef::Exceptions::RunFailedWrappingError.new(reboot_error)
       expect(exit_codes.validate_exit_code(runtime_error)).to eq(41)
     end
-    
+
     it "returns REBOOT_NEEDED when a reboot is pending" do
-      reboot_error = Chef::Exceptions::RebootPending.new('BOOM')
+      reboot_error = Chef::Exceptions::RebootPending.new("BOOM")
       runtime_error = Chef::Exceptions::RunFailedWrappingError.new(reboot_error)
       expect(exit_codes.validate_exit_code(runtime_error)).to eq(37)
     end
