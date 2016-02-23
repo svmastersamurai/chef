@@ -260,7 +260,7 @@ EOM
             end
           end
 
-          xit "exits with REBOOT_NOW, 40" do
+          xit "exits with REBOOT_SCHEDULED, 35" do
             setup_client_rb
             run_chef_client_and_expect_exit_code 35
           end

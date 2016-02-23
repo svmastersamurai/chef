@@ -31,7 +31,6 @@ class Chef
         GENERIC_FAILURE: 1,
         REBOOT_SCHEDULED: 35,
         REBOOT_NEEDED: 37,
-        REBOOT_NOW: 40,
         REBOOT_FAILED: 41,
         AUDIT_MODE_FAILURE: 42,
       }

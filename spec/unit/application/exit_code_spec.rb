@@ -51,10 +51,6 @@ describe Chef::Application::ExitCode do
       expect(exit_codes.valid?(37)).to eq(true)
     end
 
-    it "validates a REBOOT_NOW return code of 40" do
-      expect(exit_codes.valid?(40)).to eq(true)
-    end
-
     it "validates a REBOOT_FAILED return code of 41" do
       expect(exit_codes.valid?(41)).to eq(true)
     end
@@ -168,10 +164,10 @@ describe Chef::Application::ExitCode do
       expect(exit_codes.validate_exit_code(runtime_error)).to eq(42)
     end
 
-    it "returns REBOOT_NOW when there is an reboot requested" do
+    it "returns REBOOT_SCHEDULED when there is an reboot requested" do
       reboot_error = Chef::Exceptions::Reboot.new("BOOM")
       runtime_error = Chef::Exceptions::RunFailedWrappingError.new(reboot_error)
-      expect(exit_codes.validate_exit_code(runtime_error)).to eq(40)
+      expect(exit_codes.validate_exit_code(runtime_error)).to eq(35)
     end
 
     it "returns REBOOT_FAILED when the reboot command fails" do
