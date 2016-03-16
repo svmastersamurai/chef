@@ -71,6 +71,20 @@ To mention the team, use @chef/client-test-tools
 * [Lamont Granquist](https://github.com/lamont-granquist)
 * [Ranjib Dey](https://github.com/ranjib)
 
+## Chef Provisioning
+
+Chef Provisioning and Drivers.  Supported Drivers are listed in the [README](https://github.com/chef/chef-provisioning/blob/master/README.md#chef-provisioning).
+
+To mention the team, use @chef/provisioning
+
+### Lieutenant
+
+* [To Be Decided...](https://github.com/)
+
+### Maintainers
+
+* [To Be Decided...](https://github.com/)
+
 ## Platform Specific Components
 
 The specific components of Chef related to a given platform - including (but not limited to) resources, providers, and the core DSL.
@@ -160,6 +174,30 @@ To mention the team, use @chef/client-debian
 ### Maintainers
 
 * [Lamont Granquist](https://github.com/lamont-granquist)
+
+## Cisco NX-OS
+
+To mention the team, use @chef/client-nxos
+
+### Lieutenant
+
+* [Carl Perry](https://github.com/edolnx)
+
+### Maintainers
+
+* [Carl Perry](https://github.com/edolnx)
+
+## Cisco IOS XR
+
+To mention the team, use @chef/client-iosxr
+
+### Lieutenant
+
+* [Carl Perry](https://github.com/edolnx)
+
+### Maintainers
+
+* [Carl Perry](https://github.com/edolnx)
 
 ## Fedora
 

@@ -84,6 +84,19 @@ another component.
         "ranjib"
       ]
 
+    [Org.Components.Provisioning]
+      title = "Chef Provisioning"
+      team = "provisioning"
+      text = """
+Chef Provisioning and Drivers.  Supported Drivers are listed in the [README](https://github.com/chef/chef-provisioning/blob/master/README.md#chef-provisioning).
+"""
+
+      lieutenant = "TBD"
+
+      maintainers = [
+        "TBD",
+      ]
+
     [Org.Components.Subsystems]
       title = "Platform Specific Components"
       text = """
@@ -360,3 +373,6 @@ The specific components of Chef related to a given platform - including (but not
   [people.cperry]
     Name = "Carl Perry"
     GitHub = "edolnx"
+
+  [people.TBD]
+    Name = "To Be Decided..."
