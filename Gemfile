@@ -8,6 +8,8 @@ gem "chef-config", path: "chef-config" if File.exist?(__FILE__ + "../chef-config
 # Ensure that we can always install rake, regardless of gem groups
 gem "rake"
 
+gem "ffi", github: "lamont-granquist/ffi", branch: "lcg/rb_gc_guard_ptr" if RUBY_PLATFORM.downcase =~ /aix/
+
 group(:docgen) do
   gem "yard"
 end
