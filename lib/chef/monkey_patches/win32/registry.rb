@@ -28,7 +28,7 @@ module Win32
 
       module_function
 
-      if RUBY_VERSION =~ /^2\.1/
+      if RUBY_VERSION =~ /^2\.[21]/
         # ::Win32::Registry#delete_value is broken in Ruby 2.1 (up to Ruby 2.1.6).
         # This should be resolved in a later release (see note #9 in link below).
         # https://bugs.ruby-lang.org/issues/10820
